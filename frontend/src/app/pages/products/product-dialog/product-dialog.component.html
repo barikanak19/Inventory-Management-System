@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Product' : 'Add Product' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div class="image-section">
+      <div class="image-preview">
+        @if (imagePreviewUrl()) {
+          <img [src]="imagePreviewUrl()" alt="Product preview" />
+        } @else {
+          <mat-icon>image</mat-icon>
+        }
+      </div>
+      <div class="image-actions">
+        <button mat-stroked-button type="button" (click)="fileInput.click()">
+          <mat-icon>upload</mat-icon>
+          Choose Image
+        </button>
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          hidden
+          (change)="onFileSelected($event)"
+        />
+        @if (imageError()) {
+          <div class="image-error">{{ imageError() }}</div>
+        }
+      </div>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Product Name</mat-label>
+      <input matInput formControlName="name" autocomplete="off" />
+      @if (name.touched && name.hasError('required')) {
+        <mat-error>Product name is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Price</mat-label>
+      <input matInput type="number" step="0.01" min="0" formControlName="price" />
+      <span matTextPrefix>$&nbsp;</span>
+      @if (price.touched && price.hasError('required')) {
+        <mat-error>Price is required</mat-error>
+      }
+      @if (price.touched && price.hasError('min')) {
+        <mat-error>Price cannot be negative</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="categoryId">
+        @for (category of data.categories; track category.id) {
+          <mat-option [value]="category.id">{{ category.name }}</mat-option>
+        }
+      </mat-select>
+      @if (categoryId.touched && categoryId.hasError('required')) {
+        <mat-error>Category is required</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ isEditMode ? 'Save Changes' : 'Add Product' }}
+    </button>
+  </mat-dialog-actions>
+</form>

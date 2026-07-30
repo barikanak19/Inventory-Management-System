@@ -1,0 +1,126 @@
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: #1e293b;
+}
+
+.page-subtitle {
+  color: #64748b;
+  margin: 0 0 24px;
+}
+
+.upload-card,
+.summary-card {
+  max-width: 640px;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.format-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: #eff6ff;
+  color: #1e40af;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 20px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+  }
+}
+
+.file-picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.file-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  padding: 4px 8px 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.progress-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  mat-progress-bar {
+    flex: 1;
+  }
+
+  .progress-label {
+    font-size: 13px;
+    color: #64748b;
+    min-width: 36px;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.summary-card h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.summary-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+
+  .stat-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  &.success .stat-value {
+    color: #16a34a;
+  }
+
+  &.failed .stat-value {
+    color: #dc2626;
+  }
+}
+
+.summary-card h3 {
+  font-size: 14px;
+  margin: 0 0 8px;
+  color: #1e293b;
+}
+
+.error-table {
+  width: 100%;
+}

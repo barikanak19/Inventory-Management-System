@@ -1,0 +1,87 @@
+<div class="bulk-upload-page">
+  <h1 class="page-title">Bulk Upload</h1>
+  <p class="page-subtitle">Import products in bulk via CSV or Excel (.xlsx)</p>
+
+  <mat-card class="upload-card">
+    <div class="format-hint">
+      <mat-icon>info</mat-icon>
+      <span>
+        File must include columns: <strong>name</strong>, <strong>price</strong>,
+        <strong>category</strong> (category must already exist).
+      </span>
+    </div>
+
+    <div class="file-picker">
+      <button mat-stroked-button type="button" (click)="fileInput.click()" [disabled]="uploading()">
+        <mat-icon>attach_file</mat-icon>
+        Choose File
+      </button>
+      <input #fileInput type="file" accept=".csv,.xlsx" hidden (change)="onFileSelected($event)" />
+
+      @if (selectedFile()) {
+        <div class="file-chip">
+          <mat-icon>description</mat-icon>
+          <span>{{ selectedFile()?.name }}</span>
+          <button mat-icon-button (click)="clearFile()" [disabled]="uploading()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      }
+    </div>
+
+    @if (uploading()) {
+      <div class="progress-section">
+        <mat-progress-bar mode="determinate" [value]="progress()"></mat-progress-bar>
+        <span class="progress-label">{{ progress() }}%</span>
+      </div>
+    }
+
+    <div class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!selectedFile() || uploading()"
+        (click)="upload()"
+      >
+        <mat-icon>cloud_upload</mat-icon>
+        Upload
+      </button>
+    </div>
+  </mat-card>
+
+  @if (summary(); as result) {
+    <mat-card class="summary-card">
+      <h2>Upload Summary</h2>
+      <div class="summary-stats">
+        <div class="stat">
+          <span class="stat-value">{{ result.totalRows }}</span>
+          <span class="stat-label">Total Rows</span>
+        </div>
+        <div class="stat success">
+          <span class="stat-value">{{ result.successCount }}</span>
+          <span class="stat-label">Succeeded</span>
+        </div>
+        <div class="stat failed">
+          <span class="stat-value">{{ result.failedCount }}</span>
+          <span class="stat-label">Failed</span>
+        </div>
+      </div>
+
+      @if (result.errors.length > 0) {
+        <h3>Validation Errors</h3>
+        <table mat-table [dataSource]="result.errors" class="error-table">
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef>Row</th>
+            <td mat-cell *matCellDef="let err">{{ err.row }}</td>
+          </ng-container>
+          <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef>Error</th>
+            <td mat-cell *matCellDef="let err">{{ err.message }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="errorColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: errorColumns"></tr>
+        </table>
+      }
+    </mat-card>
+  }
+</div>

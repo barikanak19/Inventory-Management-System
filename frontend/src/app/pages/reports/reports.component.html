@@ -1,0 +1,68 @@
+<div class="reports-page">
+  <h1 class="page-title">Reports</h1>
+  <p class="page-subtitle">Export your product catalog as CSV or Excel</p>
+
+  <mat-card class="filters-card">
+    <h2>Filters</h2>
+    <form [formGroup]="filterForm" class="filters-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Search by product name</mat-label>
+        <input matInput formControlName="search" placeholder="Optional" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+          <mat-option [value]="null">All Categories</mat-option>
+          @for (category of categories(); track category.id) {
+            <mat-option [value]="category.id">{{ category.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card>
+
+  <div class="download-cards">
+    <mat-card class="download-card">
+      <mat-icon class="format-icon csv">description</mat-icon>
+      <h3>CSV Export</h3>
+      <p>Comma-separated file, compatible with any spreadsheet tool.</p>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="downloadingCsv()"
+        (click)="download('csv')"
+      >
+        @if (downloadingCsv()) {
+          <mat-spinner diameter="18" class="btn-spinner"></mat-spinner>
+        } @else {
+          <ng-container>
+            <mat-icon>download</mat-icon>
+            Download CSV
+          </ng-container>
+        }
+      </button>
+    </mat-card>
+
+    <mat-card class="download-card">
+      <mat-icon class="format-icon xlsx">table_chart</mat-icon>
+      <h3>Excel Export</h3>
+      <p>Formatted .xlsx workbook, ready for Excel or Google Sheets.</p>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="downloadingXlsx()"
+        (click)="download('xlsx')"
+      >
+        @if (downloadingXlsx()) {
+          <mat-spinner diameter="18" class="btn-spinner"></mat-spinner>
+        } @else {
+          <ng-container>
+            <mat-icon>download</mat-icon>
+            Download XLSX
+          </ng-container>
+        }
+      </button>
+    </mat-card>
+  </div>
+</div>
