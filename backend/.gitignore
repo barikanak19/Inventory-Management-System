@@ -4,4 +4,4 @@ uploads/products/*
 !uploads/products/.gitkeep
 *.log
 .DS_Store
-New Collection.postman_collection.json
+New Collection.postman_collection
