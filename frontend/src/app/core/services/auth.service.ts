@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../models/api-response.model';
-import { AuthData, LoginRequest, RegisterRequest } from '../models/auth.model';
+import { AuthData, LoginRequest, RegisterRequest, RegisterResponse } from '../models/auth.model';
 import { User } from '../models/user.model';
 
 const TOKEN_KEY = 'ims_token';
@@ -24,10 +24,11 @@ export class AuthService {
       .pipe(tap((res) => this.setSession(res.data)));
   }
 
-  register(payload: RegisterRequest): Observable<ApiResponse<AuthData>> {
-    return this.http
-      .post<ApiResponse<AuthData>>(`${environment.apiUrl}/auth/register`, payload)
-      .pipe(tap((res) => this.setSession(res.data)));
+  register(payload: RegisterRequest): Observable<ApiResponse<RegisterResponse>> {
+    return this.http.post<ApiResponse<RegisterResponse>>(
+      `${environment.apiUrl}/auth/register`,
+      payload
+    );
   }
 
   logout(): void {

@@ -19,17 +19,45 @@ const AuthService = {
    * Registers a new user. Passwords are hashed with bcrypt
    * (never stored or logged in plain text).
    */
-  async register({ email, password }) {
-    const existing = await UserModel.findByEmail(email);
+  async register({ name, email, password, confirmPassword }) {
+    const safeName = String(name || '').trim();
+    const safeEmail = String(email || '').trim().toLowerCase();
+
+    if (!safeName) {
+      throw ApiError.badRequest('Full name is required');
+    }
+
+    if (!safeEmail) {
+      throw ApiError.badRequest('Email is required');
+    }
+
+    if (!password) {
+      throw ApiError.badRequest('Password is required');
+    }
+
+    if (!confirmPassword) {
+      throw ApiError.badRequest('Confirm password is required');
+    }
+
+    if (password !== confirmPassword) {
+      throw ApiError.badRequest('Passwords do not match');
+    }
+
+    const existing = await UserModel.findByEmail(safeEmail);
     if (existing) {
       throw ApiError.conflict('An account with this email already exists');
     }
 
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
-    const user = await UserModel.create({ email, passwordHash });
+    const user = await UserModel.create({ name: safeName, email: safeEmail, passwordHash });
 
-    const token = signToken(user);
-    return { user: { id: user.id, email: user.email }, token };
+    return {
+      user: {
+        id: user.id,
+        name: safeName,
+        email: safeEmail
+      }
+    };
   },
 
   /**

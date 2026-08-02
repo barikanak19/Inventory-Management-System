@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/api'
+  apiUrl: 'https://inventory-management-system-xls0.onrender.com/api'
 };

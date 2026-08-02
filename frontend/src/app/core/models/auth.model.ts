@@ -6,11 +6,17 @@ export interface LoginRequest {
 }
 
 export interface RegisterRequest {
+  name: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 export interface AuthData {
   user: User;
   token: string;
+}
+
+export interface RegisterResponse {
+  user: User;
 }

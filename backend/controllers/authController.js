@@ -5,8 +5,8 @@ const asyncHandler = require('../utils/asyncHandler');
  * POST /api/auth/register
  */
 const register = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
-  const result = await AuthService.register({ email, password });
+  const { name, email, password, confirmPassword } = req.body;
+  const result = await AuthService.register({ name, email, password, confirmPassword });
 
   res.status(201).json({
     success: true,
