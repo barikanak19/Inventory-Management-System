@@ -23,8 +23,8 @@ const AuthService = {
     const safeName = String(name || '').trim();
     const safeEmail = String(email || '').trim().toLowerCase();
 
-    if (!safeName) {
-      throw ApiError.badRequest('Full name is required');
+    if (safeName && safeName.length < 2) {
+      throw ApiError.badRequest('Name must be at least 2 characters');
     }
 
     if (!safeEmail) {
@@ -49,12 +49,11 @@ const AuthService = {
     }
 
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
-    const user = await UserModel.create({ name: safeName, email: safeEmail, passwordHash });
+    const user = await UserModel.create({ email: safeEmail, passwordHash });
 
     return {
       user: {
         id: user.id,
-        name: safeName,
         email: safeEmail
       }
     };

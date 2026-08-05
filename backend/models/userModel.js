@@ -7,7 +7,7 @@ const { pool } = require('../config/db');
 const UserModel = {
   async findByEmail(email) {
     const [rows] = await pool.query(
-      'SELECT id, name, email, password_hash, created_at FROM users WHERE email = :email LIMIT 1',
+      'SELECT id, email, password_hash, created_at FROM users WHERE email = :email LIMIT 1',
       { email }
     );
     return rows[0] || null;
@@ -15,18 +15,18 @@ const UserModel = {
 
   async findById(id) {
     const [rows] = await pool.query(
-      'SELECT id, name, email, created_at FROM users WHERE id = :id LIMIT 1',
+      'SELECT id, email, created_at FROM users WHERE id = :id LIMIT 1',
       { id }
     );
     return rows[0] || null;
   },
 
-  async create({ name, email, passwordHash }) {
+  async create({ email, passwordHash }) {
     const [result] = await pool.query(
-      'INSERT INTO users (name, email, password_hash) VALUES (:name, :email, :passwordHash)',
-      { name, email, passwordHash }
+      'INSERT INTO users (email, password_hash) VALUES (:email, :passwordHash)',
+      { email, passwordHash }
     );
-    return { id: result.insertId, name, email };
+    return { id: result.insertId, email };
   }
 };
 
