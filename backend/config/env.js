@@ -13,10 +13,25 @@ for (const key of required) {
   }
 }
 
+const defaultAllowedOrigins = [
+  'https://inventory-management-systemims.vercel.app',
+  'http://localhost:4200'
+];
+
+const allowedOrigins = Array.from(
+  new Set([
+    ...(process.env.CLIENT_URL ? [process.env.CLIENT_URL] : []),
+    ...(process.env.LOCAL_CLIENT_URL ? [process.env.LOCAL_CLIENT_URL] : []),
+    ...defaultAllowedOrigins
+  ])
+);
+
 module.exports = {
   port: Number(process.env.PORT) || 5000,
   nodeEnv: process.env.NODE_ENV || 'development',
-  clientUrl: process.env.CLIENT_URL || 'http://localhost:4200',
+  clientUrl: process.env.CLIENT_URL || 'https://inventory-management-systemims.vercel.app',
+  localClientUrl: process.env.LOCAL_CLIENT_URL || 'http://localhost:4200',
+  allowedOrigins,
   jwt: {
     secret: process.env.JWT_SECRET,
     expiresIn: process.env.JWT_EXPIRES_IN || '1d'
