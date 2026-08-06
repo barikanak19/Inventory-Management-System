@@ -21,12 +21,21 @@ const UserModel = {
     return rows[0] || null;
   },
 
-  async create({ email, passwordHash }) {
+  async create({ name, email, passwordHash }) {
     const [result] = await pool.query(
-      'INSERT INTO users (email, password_hash) VALUES (:email, :passwordHash)',
-      { email, passwordHash }
+      'INSERT INTO users (name, email, password_hash) VALUES (:name, :email, :passwordHash)',
+      {
+        name,
+        email,
+        passwordHash
+      }
     );
-    return { id: result.insertId, email };
+
+    return {
+      id: result.insertId,
+      name,
+      email
+    };
   }
 };
 
