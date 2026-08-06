@@ -49,12 +49,13 @@ const AuthService = {
     }
 
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
-    const user = await UserModel.create({ email: safeEmail, passwordHash });
+    const user = await UserModel.create({ name: safeName, email: safeEmail, passwordHash });
 
     return {
       user: {
         id: user.id,
-        email: safeEmail
+        name: user.name,
+        email: user.email
       }
     };
   },
