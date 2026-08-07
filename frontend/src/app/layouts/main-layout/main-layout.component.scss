@@ -36,6 +36,22 @@
 .app-toolbar {
   display: flex;
   align-items: center;
+  min-height: 64px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.user-menu-btn {
+  max-width: 100%;
+}
+
+.user-email {
+  margin: 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .spacer {
@@ -47,4 +63,35 @@
   background: #f4f6f9;
   min-height: calc(100vh - 64px);
   box-sizing: border-box;
+}
+
+@media (max-width: 1023px) {
+  .menu-toggle {
+    display: inline-flex;
+    margin-right: 4px;
+  }
+
+  .app-content {
+    padding: 16px;
+    min-height: calc(100vh - 56px);
+  }
+}
+
+@media (max-width: 767px) {
+  .app-sidenav {
+    width: min(84vw, 280px);
+  }
+
+  .app-toolbar {
+    min-height: 56px;
+    padding: 0 8px;
+  }
+
+  .user-email {
+    display: none;
+  }
+
+  .app-content {
+    padding: 12px;
+  }
 }

@@ -59,3 +59,22 @@
     color: #64748b;
   }
 }
+
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 22px;
+  }
+
+  .page-subtitle {
+    margin-bottom: 16px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .quick-card {
+    padding: 16px;
+  }
+}

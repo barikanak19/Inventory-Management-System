@@ -29,6 +29,61 @@ html, body {
   margin: 0;
   font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   background: #f4f6f9;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, a, input, select, textarea {
+  font: inherit;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-mdc-dialog-container {
+  max-width: calc(100vw - 24px);
+}
+
+.mat-mdc-dialog-surface {
+  max-height: calc(100vh - 24px);
+}
+
+.mat-mdc-dialog-actions {
+  gap: 8px;
+}
+
+.mat-sidenav-content {
+  min-width: 0;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table[mat-table] {
+  min-width: 640px;
+}
+
+button[mat-raised-button], button[mat-stroked-button], button[mat-button] {
+  white-space: normal;
+}
+
+@media (max-width: 767px) {
+  .mat-mdc-dialog-actions {
+    flex-wrap: wrap;
+    justify-content: stretch;
+
+    button {
+      flex: 1 1 120px;
+    }
+  }
 }
 
 .snackbar-success {

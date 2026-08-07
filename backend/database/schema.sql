@@ -13,6 +13,7 @@ USE inventory_management;
 -- =========================================================
 CREATE TABLE IF NOT EXISTS users (
   id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name          VARCHAR(150) NOT NULL,
   email         VARCHAR(255) NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
   created_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -20,6 +21,10 @@ CREATE TABLE IF NOT EXISTS users (
 
   CONSTRAINT uq_users_email UNIQUE (email)
 ) ENGINE=InnoDB;
+
+-- Keeps existing installations compatible with registration.
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS name VARCHAR(150) NOT NULL DEFAULT '' AFTER id;
 
 -- =========================================================
 -- TABLE: categories

@@ -1,5 +1,5 @@
-<mat-sidenav-container class="app-shell">
-  <mat-sidenav mode="side" opened class="app-sidenav">
+<mat-sidenav-container class="app-shell" [hasBackdrop]="isMobile">
+  <mat-sidenav #sidenav class="app-sidenav" [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? isSidenavOpen : true" [disableClose]="!isMobile">
     <div class="brand">
       <mat-icon>inventory_2</mat-icon>
       <span>Inventory</span>
@@ -11,6 +11,7 @@
           mat-list-item
           [routerLink]="item.route"
           routerLinkActive="active-link"
+          (click)="onNavSelect()"
         >
           <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
           <span matListItemTitle>{{ item.label }}</span>
@@ -21,10 +22,15 @@
 
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="app-toolbar">
+      @if (isMobile) {
+        <button mat-icon-button class="menu-toggle" type="button" (click)="toggleSidenav()" aria-label="Toggle navigation">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
       <span class="spacer"></span>
-      <button mat-button [matMenuTriggerFor]="userMenu">
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-btn">
         <mat-icon>account_circle</mat-icon>
-        {{ currentUserEmail }}
+        <span class="user-email">{{ currentUserEmail }}</span>
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu">

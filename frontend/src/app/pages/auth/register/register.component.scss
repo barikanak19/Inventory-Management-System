@@ -73,3 +73,20 @@
     text-decoration: underline;
   }
 }
+
+@media (max-width: 767px) {
+  .login-page {
+    align-items: flex-start;
+    padding: 16px 12px;
+  }
+
+  .login-card {
+    margin: 12px 0;
+    padding: 24px 16px;
+    border-radius: 12px;
+  }
+
+  .login-header h1 {
+    font-size: 20px;
+  }
+}

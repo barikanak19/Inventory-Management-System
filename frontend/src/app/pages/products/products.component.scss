@@ -90,3 +90,35 @@
     height: 40px;
   }
 }
+
+@media (max-width: 767px) {
+  .page-header {
+    align-items: stretch;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .toolbar {
+    display: grid;
+    gap: 4px;
+  }
+
+  .search-field,
+  .filter-field {
+    max-width: none;
+  }
+
+  .table-wrapper {
+    border-radius: 8px;
+  }
+
+  mat-paginator {
+    min-width: 640px;
+  }
+}

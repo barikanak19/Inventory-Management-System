@@ -58,3 +58,21 @@
     height: 40px;
   }
 }
+
+@media (max-width: 767px) {
+  .page-header {
+    align-items: stretch;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .table-wrapper {
+    border-radius: 8px;
+  }
+}

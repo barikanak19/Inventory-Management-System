@@ -41,3 +41,15 @@
   color: #dc2626;
   font-size: 12px;
 }
+
+@media (max-width: 767px) {
+  .image-section {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .image-actions {
+    min-width: 0;
+    flex: 1 1 180px;
+  }
+}

@@ -83,3 +83,30 @@
   display: inline-block;
   margin: 0 auto;
 }
+
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 22px;
+  }
+
+  .filters-card,
+  .download-card {
+    width: 100%;
+    max-width: none;
+    padding: 16px;
+  }
+
+  .filters-form {
+    display: grid;
+    gap: 4px;
+
+    mat-form-field {
+      min-width: 0;
+    }
+  }
+
+  .download-cards {
+    display: grid;
+    gap: 12px;
+  }
+}

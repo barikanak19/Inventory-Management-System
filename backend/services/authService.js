@@ -23,7 +23,11 @@ const AuthService = {
     const safeName = String(name || '').trim();
     const safeEmail = String(email || '').trim().toLowerCase();
 
-    if (safeName && safeName.length < 2) {
+    if (!safeName) {
+      throw ApiError.badRequest('Name is required');
+    }
+
+    if (safeName.length < 2) {
       throw ApiError.badRequest('Name must be at least 2 characters');
     }
 
@@ -49,7 +53,16 @@ const AuthService = {
     }
 
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
-    const user = await UserModel.create({ name: safeName, email: safeEmail, passwordHash });
+
+    let user;
+    try {
+      user = await UserModel.create({ name: safeName, email: safeEmail, passwordHash });
+    } catch (error) {
+      if (error.code === 'ER_DUP_ENTRY') {
+        throw ApiError.conflict('An account with this email already exists');
+      }
+      throw error;
+    }
 
     return {
       user: {

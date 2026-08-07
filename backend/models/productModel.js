@@ -61,12 +61,19 @@ const ProductModel = {
     return rows[0] || null;
   },
 
-  async create({ name, price, categoryId, imagePath }) {
-    const [result] = await pool.query(
-      `INSERT INTO products (name, price, category_id, image_path)
-       VALUES (:name, :price, :categoryId, :imagePath)`,
-      { name, price, categoryId, imagePath: imagePath || null }
-    );
+  async create({ name, price, categoryId, imagePath, userId }) {
+   const [result] = await pool.query(
+  `INSERT INTO products
+  (name, price, category_id, image_path, user_id)
+  VALUES (:name, :price, :categoryId, :imagePath, :userId)`,
+  {
+    name,
+    price,
+    categoryId,
+    imagePath: imagePath || null,
+    userId
+  }
+);
     return this.findById(result.insertId);
   },
 

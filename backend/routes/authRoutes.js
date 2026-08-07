@@ -8,8 +8,8 @@ const router = express.Router();
 
 const registerValidators = [
   body('name')
-    .optional()
     .trim()
+    .notEmpty().withMessage('Name is required')
     .isLength({ min: 2, max: 150 }).withMessage('Name must be between 2 and 150 characters'),
   body('email')
     .trim()

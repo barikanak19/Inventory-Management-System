@@ -124,3 +124,42 @@
 .error-table {
   width: 100%;
 }
+
+@media (max-width: 767px) {
+  .upload-card,
+  .summary-card {
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .format-hint {
+    padding: 10px 12px;
+  }
+
+  .file-picker,
+  .actions {
+    align-items: stretch;
+  }
+
+  .file-picker > button,
+  .actions > button {
+    width: 100%;
+  }
+
+  .file-chip {
+    max-width: 100%;
+
+    span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .summary-stats {
+    justify-content: space-between;
+    gap: 8px;
+  }
+}

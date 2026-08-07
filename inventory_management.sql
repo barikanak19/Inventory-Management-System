@@ -86,6 +86,7 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -101,7 +102,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'barikanak19@gmail.com','$2b$12$4P4Fd.5h/uHlNTTCQWdryOMuCRbwnSauFSFRFvz41gcRVwuvlI1Lq','2026-07-29 18:03:40','2026-07-29 18:03:40');
+INSERT INTO `users` VALUES (1,'Existing User','barikanak19@gmail.com','$2b$12$4P4Fd.5h/uHlNTTCQWdryOMuCRbwnSauFSFRFvz41gcRVwuvlI1Lq','2026-07-29 18:03:40','2026-07-29 18:03:40');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
